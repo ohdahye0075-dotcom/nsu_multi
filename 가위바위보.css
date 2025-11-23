@@ -1,0 +1,39 @@
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background:#b5cdfe;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-height:100vh;
+  color:#000000;
+}
+.box{
+  background:#ede89c;
+  padding:20px;
+  border-radius:10px;
+  width:320px;
+  text-align:center;
+  box-shadow:0 8px 24px rgb(214, 213, 121);
+}
+.choices{margin:12px 0}
+.choices button{
+  padding:10px 12px;
+  margin:6px;
+  border-radius:8px;
+  border:1px solid #ddd;
+  background:#fff;
+  cursor:pointer;
+  font-weight:600;
+}
+.choices button:active{transform:translateY(1px)}
+.result{margin-top:8px;color:#222}
+.score{margin-top:12px;font-weight:700}
+.small-btn{
+  padding:8px 12px;
+  border-radius:8px;
+  border:1px solid #ccc;
+  background:#fafafa;
+  cursor:pointer;
+}

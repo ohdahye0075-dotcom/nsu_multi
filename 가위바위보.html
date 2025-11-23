@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>가위바위보 (간단)</title>
+  <link rel="stylesheet" href="가위바위보.css" />
+</head>
+<body>
+  <div class="box">
+    <h2>가위바위보</h2>
+
+    <div class="choices">
+      <button data-choice="scissors">✌️ 가위 (1)</button>
+      <button data-choice="rock">✊ 바위 (2)</button>
+      <button data-choice="paper">✋ 보 (3)</button>
+    </div>
+
+    <div id="result" class="result">선택하세요.</div>
+
+    <div class="score">
+      플레이어: <span id="p">0</span>
+      &nbsp; 컴퓨터: <span id="c">0</span>
+      &nbsp; 무: <span id="d">0</span>
+    </div>
+
+    <div style="margin-top:10px">
+      <button id="reset" class="small-btn">리셋</button>
+    </div>
+  </div>
+
+  <script>
+    const choices = ['scissors','rock','paper'];
+    const btns = document.querySelectorAll('button[data-choice]');
+    const resultEl = document.getElementById('result');
+    const pEl = document.getElementById('p'), cEl = document.getElementById('c'), dEl = document.getElementById('d');
+    let p=0, c=0, d=0;
+
+    function compPick(){ return choices[Math.floor(Math.random()*3)]; }
+    function decide(pl, co){
+      if(pl===co) return '무승부';
+      if((pl==='scissors'&&co==='paper')||(pl==='rock'&&co==='scissors')||(pl==='paper'&&co==='rock')) return '이겼다';
+      return '졌다';
+    }
+
+    btns.forEach(b => b.addEventListener('click', () => {
+      const pl = b.dataset.choice;
+      const co = compPick();
+      const r = decide(pl, co);
+      resultEl.textContent = `나: ${pl}  컴퓨터: ${co} → ${r}`;
+      if(r === '이김') p++; else if(r === '졌음') c++; else d++;
+      pEl.textContent = p; cEl.textContent = c; dEl.textContent = d;
+    }));
+
+    document.getElementById('reset').addEventListener('click', () => {
+      p=0; c=0; d=0;
+      pEl.textContent = 0; cEl.textContent = 0; dEl.textContent = 0;
+      resultEl.textContent = '선택하세요.';
+    });
+
+    document.addEventListener('keydown', e => {
+      const k = e.key.toLowerCase();
+      if(k === '1') document.querySelector('button[data-choice="scissors"]').click();
+      if(k === '2') document.querySelector('button[data-choice="rock"]').click();
+      if(k === '3') document.querySelector('button[data-choice="paper"]').click();
+    });
+  </script>
+</body>
+</html>
